@@ -1,43 +1,37 @@
 package com.daangun.clonecode.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.daangun.clonecode.model.Request.UserRequest;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+
 
 @Entity
-public class User {
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Where(clause = "deleted = false")
+@SQLDelete(sql = "UPDATE notice SET deleted = true Where id = ?")
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String e_address;
 
-    public User() {
+
+    public static User from(UserRequest request){
+        return User.builder()
+                .name(request.getName())
+                .e_address(request.getE_address())
+                .build();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getE_address() {
-        return e_address;
-    }
-
-    public void setE_address(String e_address) {
-        this.e_address = e_address;
-    }
 }
