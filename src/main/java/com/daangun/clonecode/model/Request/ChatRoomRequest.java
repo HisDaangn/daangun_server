@@ -1,4 +1,5 @@
 package com.daangun.clonecode.model.Request;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -6,9 +7,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class UserRequest {
-    private String e_address;
-    private String name;
-    private double temperature;
+public class ChatRoomRequest {
+    private Long pubId;
+    private Long subId;
 
 }

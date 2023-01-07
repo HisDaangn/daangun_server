@@ -25,12 +25,14 @@ public class User extends BaseEntity {
     private Long id;
     private String name;
     private String e_address;
+    private double temperature;
 
 
     public static User from(UserRequest request){
         return User.builder()
                 .name(request.getName())
                 .e_address(request.getE_address())
+                .temperature(request.getTemperature())
                 .build();
     }
 
