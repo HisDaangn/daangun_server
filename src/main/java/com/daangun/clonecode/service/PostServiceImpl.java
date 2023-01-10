@@ -9,5 +9,4 @@ import org.springframework.stereotype.Service;
 public class PostServiceImpl {
     @Autowired
     private PostRepository postRepository;
-
 }
