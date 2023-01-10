@@ -1,5 +1,6 @@
 package com.daangun.clonecode.service;
 
+
 import com.daangun.clonecode.exception.chatroom.ChatRoomException;
 import com.daangun.clonecode.model.ChatRoom;
 import com.daangun.clonecode.repository.ChatRoomRepository;
@@ -21,4 +22,5 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     public ChatRoom findById(Long chatRoomId) {
         return chatRoomRepository.findById(chatRoomId).orElseThrow(ChatRoomException);
     }
+
 }

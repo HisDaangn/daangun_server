@@ -4,4 +4,5 @@ import com.daangun.clonecode.model.ChatMessage;
 
 public interface ChatMessageService {
     public ChatMessage savePrivateMessage(ChatMessage message);
+
 }

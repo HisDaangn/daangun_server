@@ -25,8 +25,6 @@ public class ChatRoom extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Post post;
-
-
     private Long pubId;
     private Long subId;
 
