@@ -2,17 +2,20 @@ package com.daangun.clonecode.controller;
 
 
 import com.daangun.clonecode.model.ChatRoom;
+
 import com.daangun.clonecode.model.Post;
 import com.daangun.clonecode.model.Request.ChatRoomRequest;
 import com.daangun.clonecode.service.ChatRoomService;
 import com.daangun.clonecode.service.PostService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/chat")
@@ -22,6 +25,7 @@ public class ChatRoomController {
 
     @Autowired
     private ChatRoomService chatRoomService;
+
 
     private PostService postService;
 

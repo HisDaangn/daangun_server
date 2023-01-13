@@ -3,6 +3,7 @@ package com.daangun.clonecode.service;
 
 import com.daangun.clonecode.model.ChatRoom;
 
+
 import java.util.List;
 
 public interface ChatRoomService {
@@ -12,4 +13,5 @@ public interface ChatRoomService {
     void save(ChatRoom chatroom);
 
     ChatRoom findByRoomId(String roomId);
+
 }
