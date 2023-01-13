@@ -9,6 +9,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -25,12 +26,14 @@ public class ChatRoom extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Post post;
+    private String roomId;
     private Long pubId;
     private Long subId;
 
     public static ChatRoom from(Post post, ChatRoomRequest request){
         return ChatRoom.builder()
                 .post(post)
+                .roomId(UUID.randomUUID().toString())
                 .pubId(request.getPubId())
                 .subId(request.getSubId())
                 .build();
