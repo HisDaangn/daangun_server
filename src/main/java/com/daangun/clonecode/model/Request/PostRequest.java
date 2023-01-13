@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class PostRequest {
-    private String photo;
+    private String photoURL;
+    private Long writerId;
     private String title;
     private int price;
     private String content;
     private int viewCnt;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime expose_at;
+
 }
