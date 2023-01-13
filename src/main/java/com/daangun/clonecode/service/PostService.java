@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface PostService {
     Post findById(Long postId);
+
+    Long create(Post post);
 }

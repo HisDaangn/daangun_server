@@ -22,7 +22,7 @@ public class Post extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String photo;
+    private String photoURL;
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -37,12 +37,13 @@ public class Post extends BaseEntity {
 
     public static Post from(User writer, PostRequest request){
         return Post.builder()
-                .photo(request.getPhoto())
+                .photoURL(request.getPhotoURL())
                 .title(request.getTitle())
                 .writer(writer)
                 .price(request.getPrice())
                 .content(request.getContent())
                 .viewCnt(request.getViewCnt())
+                .expose_at(LocalDateTime.now())
                 .build();
     }
 
