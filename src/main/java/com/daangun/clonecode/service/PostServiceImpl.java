@@ -3,6 +3,7 @@ package com.daangun.clonecode.service;
 
 import com.daangun.clonecode.model.Post;
 
+import com.daangun.clonecode.model.Request.PostRequest;
 import com.daangun.clonecode.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,12 @@ public class PostServiceImpl implements PostService {
     public Long create(Post post) {
         Post p = postRepository.save(post);
         return p.getId();
+    }
+
+    @Override
+    public Post update(Long id, PostRequest request) {
+        Post post = this.findById(id);
+        post.update(request);
+        return post;
     }
 }
