@@ -46,6 +46,16 @@ public class Post extends BaseEntity {
                 .expose_at(LocalDateTime.now())
                 .build();
     }
+    public void update(PostRequest request){
+        this.photoURL = request.getPhotoURL();
+        this.title = request.getTitle();
+        this.price = request.getPrice();
+        this.content = request.getContent();
+    }
+
+    public void viewUp(){
+        this.viewCnt++;
+    }
 
 
 
