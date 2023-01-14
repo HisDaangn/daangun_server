@@ -16,5 +16,4 @@ public class PostRequest {
     private int price;
     private String content;
     private int viewCnt;
-
 }
