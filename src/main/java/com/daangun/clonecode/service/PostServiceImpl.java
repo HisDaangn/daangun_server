@@ -7,6 +7,7 @@ import com.daangun.clonecode.model.Request.PostRequest;
 import com.daangun.clonecode.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
@@ -33,6 +34,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public Post update(Long id, PostRequest request) {
         Post post = this.findById(id);
         post.update(request);
