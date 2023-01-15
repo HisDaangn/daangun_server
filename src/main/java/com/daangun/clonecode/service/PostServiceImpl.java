@@ -27,6 +27,8 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(postId).get();
         return post;
     }
+
+
     @SneakyThrows
     @Override
     @Transactional

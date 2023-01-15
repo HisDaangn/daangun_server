@@ -27,7 +27,6 @@ public class Post extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private User writer;
-
     private int price;
     private String content;
     private int viewCnt;
