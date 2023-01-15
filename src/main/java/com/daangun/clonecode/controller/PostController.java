@@ -3,11 +3,14 @@ package com.daangun.clonecode.controller;
 import com.daangun.clonecode.model.Post;
 import com.daangun.clonecode.model.Request.PostRequest;
 import com.daangun.clonecode.model.User;
+import com.daangun.clonecode.repository.PostRepository;
 import com.daangun.clonecode.service.PostService;
 import com.daangun.clonecode.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //import javax.xml.ws.Response;
 
@@ -44,6 +47,18 @@ public class PostController {
         postService.delete(id);
         return ResponseEntity.ok(id);
     }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Post>> viewAll(){
+       List<Post> target = postService.getAllItems();
+        return ResponseEntity.ok(target);
+
+    }
+
+
+
+
     @PatchMapping("/lift/{id}")
     public ResponseEntity<Long> lift(@PathVariable Long id){
         postService.lift(id);
