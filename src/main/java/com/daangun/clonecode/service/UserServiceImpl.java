@@ -30,9 +30,4 @@ public class UserServiceImpl implements UserService{
         return response;
     }
 
-//    @Override
-//    public User updateUser(Long userId, User user) {
-//        User response = userRepository.update(userId,user);
-//        return null;
-//    }
 }
