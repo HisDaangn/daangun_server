@@ -23,8 +23,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/pub"); //client에서 SEND 요청 처리 (수신)
-        registry.enableSimpleBroker("/sub"); //해당 경로로 SimpleBroker 등록, SimpleBroker는 해당 경로를 구독하는 client에게 메시지를 전달 (발신)
+        registry.setApplicationDestinationPrefixes("/pub"); // client에서 SEND 요청 처리 (수신)
+        registry.enableSimpleBroker("/sub"); // 해당 경로로 SimpleBroker 등록, SimpleBroker는 해당 경로를 구독하는 client에게 메시지를 전달 (발신)
     }
 
 }

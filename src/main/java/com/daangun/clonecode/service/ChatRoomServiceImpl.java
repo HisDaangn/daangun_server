@@ -28,6 +28,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
     @Override
+    public int countChatRoomByPostId(Long postId) {
+        int cnt = chatRoomRepository.countChatRoomByPostId(postId);
+        return cnt;
+    }
+
+    @Override
     public List<ChatRoom> findAllByUserId(Long id){
         List<ChatRoom> list = chatRoomRepository.findChatRoomByUserId(id);
         return list;

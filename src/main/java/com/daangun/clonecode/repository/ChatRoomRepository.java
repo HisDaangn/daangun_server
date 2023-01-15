@@ -20,7 +20,10 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     "order by r.created_at desc ")
     List<ChatRoom> findChatRoomByUserId(Long userId);
 
-
     @Query("select r from ChatRoom r where r.roomId = :roomId")
     ChatRoom findByRoomId(String roomId);
+
+    @Query("select count(r.id) from ChatRoom r " +
+            "where r.post.id = :postId ")
+    int countChatRoomByPostId(Long postId);
 }

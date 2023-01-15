@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.Inet4Address;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,11 +59,10 @@ public class ChatRoomController {
         return ResponseEntity.ok(response);
     }
 
-
-
-
-
-
-
+    @GetMapping(value = "")
+    public ResponseEntity<Integer> countChatRoomByPostId(@RequestBody Post post) {
+        Integer response = chatRoomService.countChatRoomByPostId(post.getId());
+        return ResponseEntity.ok(response);
+    }
 
 }
