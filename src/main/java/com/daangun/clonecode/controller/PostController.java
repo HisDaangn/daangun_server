@@ -29,14 +29,24 @@ public class PostController {
         return ResponseEntity.ok(id);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> view(@PathVariable Long id){
+        Post target = postService.findById(id);
+        return ResponseEntity.ok(target);
+    }
     @PatchMapping("/{id}")
     public ResponseEntity<Post> update(@PathVariable Long id, @RequestBody PostRequest request){
         Post target = postService.update(id, request);
         return ResponseEntity.ok(target);
     }
-
-
-
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable Long id){
+        postService.delete(id);
+        return ResponseEntity.ok(id);
+    }
+    @PatchMapping("/lift/{id}")
+    public ResponseEntity<Long> lift(@PathVariable Long id){
+        postService.lift(id);
+        return ResponseEntity.ok(id);
+    }
 }

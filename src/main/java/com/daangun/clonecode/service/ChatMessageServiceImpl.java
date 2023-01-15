@@ -16,7 +16,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     private ChatRoomService chatRoomService;
 
 
-    public ChatMessage savePrivateMessage(ChatMessage message) {
+    public ChatMessage save(ChatMessage message) {
         ChatMessage ret = chatMessageRepository.save(message);
         System.out.println("채팅저장완료.");
         return ret;
