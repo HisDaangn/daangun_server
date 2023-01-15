@@ -26,8 +26,17 @@ public class UserController {
     @GetMapping("/getAll")
     public List<User> getAllUsers(){return userService.getAllUsers();}
 
+    @GetMapping("/getUser/{googleId}")
+    public ResponseEntity<User> getUser(@PathVariable String googleId){
+        User user = userService.findUserByGoogleId(googleId);
+        return ResponseEntity.ok(user);
+    }
 
-
+    @PatchMapping("/profileUpdate/{googleId}")
+    public ResponseEntity<User> update(@PathVariable String googleId, @RequestBody UserRequest userReq){
+        User user = userService.update(googleId, userReq);
+        return ResponseEntity.ok(user);
+    }
 
 
 
