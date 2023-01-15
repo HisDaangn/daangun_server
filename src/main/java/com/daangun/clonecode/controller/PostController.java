@@ -43,9 +43,9 @@ public class PostController {
         postService.delete(id);
         return ResponseEntity.ok(id);
     }
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<Post> lift(@PathVariable Long id){
-//        Post target = postService.lift(id);
-//        return ResponseEntity.ok(target);
-//    }
+    @PatchMapping("/lift/{id}")
+    public ResponseEntity<Long> lift(@PathVariable Long id){
+        postService.lift(id);
+        return ResponseEntity.ok(id);
+    }
 }

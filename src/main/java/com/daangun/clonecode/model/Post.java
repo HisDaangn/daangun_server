@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @Where(clause = "deleted = false")
 @SQLDelete(sql = "UPDATE post SET deleted = true Where id = ?")
 public class Post extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,6 @@ public class Post extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private User writer;
-
     private int price;
     private String content;
     private int viewCnt;
