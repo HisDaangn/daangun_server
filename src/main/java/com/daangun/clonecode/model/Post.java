@@ -16,9 +16,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE notice SET deleted = true Where id = ?")
+@SQLDelete(sql = "UPDATE post SET deleted = true Where id = ?")
 public class Post extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,6 @@ public class Post extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private User writer;
-
     private int price;
     private String content;
     private int viewCnt;
@@ -46,7 +44,16 @@ public class Post extends BaseEntity {
                 .expose_at(LocalDateTime.now())
                 .build();
     }
+    public void update(PostRequest request){
+        this.photoURL = request.getPhotoURL();
+        this.title = request.getTitle();
+        this.price = request.getPrice();
+        this.content = request.getContent();
+    }
 
+    public void viewUp(){
+        this.viewCnt++;
+    }
 
-
+    public void lift(){this.expose_at = LocalDateTime.now();}
 }

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE notice SET deleted = true Where id = ?")
+@SQLDelete(sql = "UPDATE chat_message SET deleted = true Where id = ?")
 public class ChatMessage extends BaseEntity {
 
     @Id

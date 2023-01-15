@@ -24,11 +24,16 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
+
+    @Column(unique = true)
+    private String googleId;
+
     private String e_address;
     private String name;
 
     private double temperature;
-    private String google_id;
 
 
     public static User from(UserRequest request){
