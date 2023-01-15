@@ -1,10 +1,12 @@
 package com.daangun.clonecode.service;
 
 
+import com.daangun.clonecode.exception.post.PostException;
 import com.daangun.clonecode.model.Post;
 
 import com.daangun.clonecode.model.Request.PostRequest;
 import com.daangun.clonecode.repository.PostRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,40 +20,45 @@ import java.util.function.Supplier;
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
-    private Supplier<? extends Throwable> PostException ;
-
-
+    private Supplier<? extends Throwable> PostException;
 
     @Override
-    public Post findById(Long postId){
+    public Post findOne(Long postId){
         Post post = postRepository.findById(postId).get();
         return post;
     }
-
+    @SneakyThrows
     @Override
+    @Transactional
+    public Post findById(Long postId){
+        Post post = postRepository.findById(postId).orElseThrow(PostException);
+        post.viewUp();
+        return post;
+    }
+    @Override
+    @Transactional
     public Long create(Post post) {
         Post p = postRepository.save(post);
         return p.getId();
     }
-
-//    @Override
-//    public Post getPost(Long id, PostRequest request) {
-//        Post p = this.findById(id);
-//        return p;
-//    }
-
     @Override
     @Transactional
     public Post update(Long id, PostRequest request) {
-        Post post = this.findById(id);
+        Post post = this.findOne(id);
         post.update(request);
         return post;
     }
 
     @Override
-    public Post delete(Long id, PostRequest request) {
-        Post p = postRepository.findById(id).get();
-        return p;
+    @Transactional
+    public void delete(Long id){
+        postRepository.deleteById(id);
     }
-
+    @Override
+    @Transactional
+    public Post lift(Long id) {
+        Post post = this.findOne(id);
+        post.lift();
+        return post;
+    }
 }

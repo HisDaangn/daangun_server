@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE notice SET deleted = true Where id = ?")
+@SQLDelete(sql = "UPDATE post SET deleted = true Where id = ?")
 public class Post extends BaseEntity {
 
     @Id
@@ -57,6 +57,5 @@ public class Post extends BaseEntity {
         this.viewCnt++;
     }
 
-
-
+    public void lift(){this.expose_at = LocalDateTime.now();}
 }

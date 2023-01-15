@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface PostService {
     Post findById(Long postId);
+    Post findOne(Long postId);
     Long create(Post post);
-//    Post getPost(Long id, PostRequest request);
     Post update(Long id, PostRequest request);
-    Post delete(Long id, PostRequest request);
+    void delete(Long id);
+    Post lift(Long id);
 }
