@@ -10,5 +10,6 @@ public class UserRequest {
     private String e_address;
     private String name;
     private double temperature;
-
+    private String googleId;
+    private String address;
 }

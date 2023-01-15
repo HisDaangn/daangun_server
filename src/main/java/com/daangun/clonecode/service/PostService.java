@@ -16,7 +16,9 @@ public interface PostService {
     Long create(Post post);
     Post update(Long id, PostRequest request);
     void delete(Long id);
-    Post lift(Long id);
+
+    void lift(Long id);
 
     List<Post> getAllItems();
+
 }

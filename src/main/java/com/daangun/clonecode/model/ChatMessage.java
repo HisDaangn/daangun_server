@@ -29,7 +29,7 @@ public class ChatMessage extends BaseEntity {
     private Long id;
 
     private Long chatRoomId;
-    private Long writer;
+    private Long writerId;
     private String message;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -38,9 +38,9 @@ public class ChatMessage extends BaseEntity {
     public static ChatMessage from(ChatMessageRequest request){
         return ChatMessage.builder()
                 .chatRoomId(request.getChatRoomId())
-                .writer(request.getWriter())
+                .writerId(request.getWriterId())
                 .message(request.getMessage())
-                .send_at(request.getSend_at())
+                .send_at(LocalDateTime.now())
                 .build();
     }
 }

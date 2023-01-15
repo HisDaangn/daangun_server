@@ -7,8 +7,6 @@ import org.hibernate.annotations.Where;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-
 
 
 @Entity
@@ -23,21 +21,27 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
+    private String name;
     @Column(unique = true)
     private String googleId;
-
     private String e_address;
+    private String address;
     private double temperature;
 
 
     public static User from(UserRequest request){
         return User.builder()
-                .name(request.getName())
                 .e_address(request.getE_address())
+                .name(request.getName())
                 .temperature(request.getTemperature())
+                .googleId(request.getGoogleId())
+                .address(request.getAddress())
                 .build();
+    }
+
+    public void update(UserRequest request){
+        this.name = request.getName();
     }
 
 }

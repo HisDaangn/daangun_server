@@ -31,6 +31,7 @@ public class PostController {
         Long id = postService.create(Post.from(writer, request));
         return ResponseEntity.ok(id);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> view(@PathVariable Long id){
         Post target = postService.findById(id);
@@ -47,6 +48,7 @@ public class PostController {
         return ResponseEntity.ok(id);
     }
 
+
     @GetMapping("/all")
     public ResponseEntity<List<Post>> viewAll(){
        List<Post> target = postService.getAllItems();
@@ -56,9 +58,10 @@ public class PostController {
 
 
 
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<Post> lift(@PathVariable Long id){
-//        Post target = postService.lift(id);
-//        return ResponseEntity.ok(target);
-//    }
+
+    @PatchMapping("/lift/{id}")
+    public ResponseEntity<Long> lift(@PathVariable Long id){
+        postService.lift(id);
+        return ResponseEntity.ok(id);
+    }
 }

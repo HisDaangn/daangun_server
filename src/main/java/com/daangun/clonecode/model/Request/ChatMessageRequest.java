@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 public class ChatMessageRequest {
 
     private Long chatRoomId;
-    private Long writer;
+    private Long writerId;
     private String message;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime send_at;
+
 }
