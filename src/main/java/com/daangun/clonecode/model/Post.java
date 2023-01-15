@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Where(clause = "deleted = false")
 @SQLDelete(sql = "UPDATE post SET deleted = true Where id = ?")
+
 public class Post extends BaseEntity {
 
     @Id
