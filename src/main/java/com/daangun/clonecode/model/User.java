@@ -31,7 +31,6 @@ public class User extends BaseEntity {
     private String googleId;
 
     private String e_address;
-    private String name;
 
     private double temperature;
 
@@ -41,8 +40,12 @@ public class User extends BaseEntity {
                 .e_address(request.getE_address())
                 .name(request.getName())
                 .temperature(request.getTemperature())
-                .google_id(request.getGoogle_id())
+                .googleId(request.getGoogle_id())
                 .build();
+    }
+
+    public void update(UserRequest request){
+        this.name = request.getName();
     }
 
 }
