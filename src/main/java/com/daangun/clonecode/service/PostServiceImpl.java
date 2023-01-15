@@ -56,9 +56,8 @@ public class PostServiceImpl implements PostService {
     }
     @Override
     @Transactional
-    public Post lift(Long id) {
+    public void lift(Long id) {
         Post post = this.findOne(id);
         post.lift();
-        return post;
     }
 }
