@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User update(String googleId, UserRequest request) {
+    public User update(String googleId, UserRequest userRequest) {
         User user = this.findUserByGoogleId(googleId);
-        user.update(request);
-        return null;
+        user.update(userRequest);
+        return user;
     }
 }

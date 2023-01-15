@@ -1,15 +1,12 @@
 package com.daangun.clonecode.model;
 
 import com.daangun.clonecode.model.Request.UserRequest;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-
 
 
 @Entity
