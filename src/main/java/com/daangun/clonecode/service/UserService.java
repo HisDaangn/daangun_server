@@ -10,5 +10,5 @@ public interface UserService {
     public List<User> getAllUsers();
     public User findById(Long userId);
     public User findUserByGoogleId(String googleId);
-    public User update(String googleId, UserRequest request);
+    public User update(String googleId, UserRequest userRequest);
 }
