@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE notice SET deleted = true Where id = ?")
+@SQLDelete(sql = "UPDATE user SET deleted = true Where id = ?")
 public class User extends BaseEntity {
 
     @Id

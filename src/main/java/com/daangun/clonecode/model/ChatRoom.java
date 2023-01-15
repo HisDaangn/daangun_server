@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE notice SET deleted = true Where id = ?")
+@SQLDelete(sql = "UPDATE chat_room SET deleted = true Where id = ?")
 public class ChatRoom extends BaseEntity {
 
     @Id

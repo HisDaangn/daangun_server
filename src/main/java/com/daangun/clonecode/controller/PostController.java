@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
+//import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping("/trade")
@@ -28,15 +28,24 @@ public class PostController {
         Long id = postService.create(Post.from(writer, request));
         return ResponseEntity.ok(id);
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> view(@PathVariable Long id){
+        Post target = postService.findById(id);
+        return ResponseEntity.ok(target);
+    }
     @PatchMapping("/{id}")
     public ResponseEntity<Post> update(@PathVariable Long id, @RequestBody PostRequest request){
         Post target = postService.update(id, request);
         return ResponseEntity.ok(target);
     }
-
-
-
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable Long id){
+        postService.delete(id);
+        return ResponseEntity.ok(id);
+    }
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<Post> lift(@PathVariable Long id){
+//        Post target = postService.lift(id);
+//        return ResponseEntity.ok(target);
+//    }
 }
