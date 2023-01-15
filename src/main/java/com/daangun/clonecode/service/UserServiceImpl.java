@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService{
         User response = userRepository.findById(userId).get();
         return response;
     }
+
+//    @Override
+//    public User updateUser(Long userId, User user) {
+//        User response = userRepository.update(userId,user);
+//        return null;
+//    }
 }
