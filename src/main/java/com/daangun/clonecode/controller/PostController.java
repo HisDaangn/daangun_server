@@ -28,6 +28,7 @@ public class PostController {
         Long id = postService.create(Post.from(writer, request));
         return ResponseEntity.ok(id);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> view(@PathVariable Long id){
         Post target = postService.findById(id);

@@ -23,12 +23,10 @@ public class User extends BaseEntity {
     private Long id;
 
     private String name;
-
     @Column(unique = true)
     private String googleId;
-
     private String e_address;
-
+    private String address;
     private double temperature;
 
 
@@ -37,7 +35,8 @@ public class User extends BaseEntity {
                 .e_address(request.getE_address())
                 .name(request.getName())
                 .temperature(request.getTemperature())
-                .googleId(request.getGoogle_id())
+                .googleId(request.getGoogleId())
+                .address(request.getAddress())
                 .build();
     }
 
