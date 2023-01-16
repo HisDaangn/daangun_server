@@ -8,6 +8,7 @@ import com.daangun.clonecode.model.Request.ChatRoomRequest;
 import com.daangun.clonecode.model.User;
 import com.daangun.clonecode.service.ChatRoomService;
 import com.daangun.clonecode.service.PostService;
+import com.daangun.clonecode.service.UserService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,31 +34,34 @@ public class ChatRoomController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserService userService;
 
-    @GetMapping(value = "/room")
-    public ResponseEntity<List<ChatRoom>> findAllByUserId(@RequestBody User user){
-        List<ChatRoom> response = chatRoomService.findAllByUserId(user.getId());
+
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<List<ChatRoom>> findAllByUserId(@PathVariable Long id){
+        List<ChatRoom> response = chatRoomService.findAllByUserId(id);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/room")
-    public void create(@RequestBody ChatRoomRequest request){
-        Post post =  postService.findOne(request.getPostId());
-        ChatRoom chatroom = ChatRoom.from(post, request);
-        chatRoomService.save(chatroom);
-    }
 
-//    @GetMapping(value = "/room/{userId}")
-//    public ResponseEntity<List<ChatRoom>> findAllByUserId(@PathVariable Long userId){
-//        List<ChatRoom> response = chatRoomService.findAllByUserId(userId);
-//        return ResponseEntity.ok(response);
-//    }
+    // Response -> String roomId
+    @PostMapping(value = "/add")
+    public ResponseEntity<String> create(@RequestBody ChatRoomRequest request){
+        Post post =  postService.findOne(request.getPostId());
+        User sub = userService.findById(request.getSubId());
+        User pub = userService.findById(request.getPubId());
+        ChatRoom chatroom = ChatRoom.from(sub.getName(), pub.getName(), post, request);
+        chatRoomService.save(chatroom);
+        return ResponseEntity.ok(chatroom.getRoomId());
+    }
 
     @GetMapping(value = "/room/{roomId}")
     public ResponseEntity<ChatRoom> findByRoomId(@PathVariable String roomId){
         ChatRoom response = chatRoomService.findByRoomId(roomId);
         return ResponseEntity.ok(response);
     }
+
 
     @GetMapping(value = "")
     public ResponseEntity<Integer> countChatRoomByPostId(@RequestBody Post post) {

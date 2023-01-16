@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatMessageRequest {
 
-    private Long chatRoomId;
+    private String roomId;
     private Long writerId;
     private String message;
 

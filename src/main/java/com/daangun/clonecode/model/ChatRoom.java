@@ -29,13 +29,17 @@ public class ChatRoom extends BaseEntity {
     private String roomId;
     private Long pubId;
     private Long subId;
+    private String pubName;
+    private String subName;
 
-    public static ChatRoom from(Post post, ChatRoomRequest request){
+    public static ChatRoom from(String subName, String pubName, Post post, ChatRoomRequest request){
         return ChatRoom.builder()
                 .post(post)
                 .roomId(UUID.randomUUID().toString())
                 .pubId(request.getPubId())
                 .subId(request.getSubId())
+                .pubName(subName)
+                .subName(pubName)
                 .build();
     }
 

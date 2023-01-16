@@ -28,7 +28,7 @@ public class ChatMessage extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long chatRoomId;
+    private String roomId;
     private Long writerId;
     private String message;
 
@@ -37,7 +37,7 @@ public class ChatMessage extends BaseEntity {
 
     public static ChatMessage from(ChatMessageRequest request){
         return ChatMessage.builder()
-                .chatRoomId(request.getChatRoomId())
+                .roomId(request.getRoomId())
                 .writerId(request.getWriterId())
                 .message(request.getMessage())
                 .send_at(LocalDateTime.now())
