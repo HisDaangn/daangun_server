@@ -21,7 +21,6 @@ import java.util.List;
 public class STOMPController {
 
     private final SimpMessagingTemplate template; //특정 Broker로 메세지를 전달
-    private UserService userService;
     private ChatMessageService chatMessageService;
 
 
@@ -42,7 +41,7 @@ public class STOMPController {
     }
 
     // RoomId -> Message 전부 가져오는 API
-    @GetMapping(value="/chat/room/{roomId}")
+    @GetMapping(value="/chat/message/{roomId}")
     public ResponseEntity<List<ChatMessage>> findAllByRoomId(@PathVariable String roomId){
         List<ChatMessage> response = chatMessageService.findChatMessageByRoomId(roomId);
         return ResponseEntity.ok(response);
