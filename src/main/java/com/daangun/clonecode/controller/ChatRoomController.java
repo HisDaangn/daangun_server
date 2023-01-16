@@ -33,25 +33,25 @@ public class ChatRoomController {
     @Autowired
     private PostService postService;
 
-
-    @GetMapping(value = "/room")
-    public ResponseEntity<List<ChatRoom>> findAllByUserId(@RequestBody User user){
-        List<ChatRoom> response = chatRoomService.findAllByUserId(user.getId());
+    // 채팅 들어갔을 때 유저 채팅방 모두 불러오기
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<List<ChatRoom>> findAllByUserId(@PathVariable Long id){
+        List<ChatRoom> response = chatRoomService.findAllByUserId(id);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/room")
-    public void create(@RequestBody ChatRoomRequest request){
+    // response -> string roomid
+    // 물품에서 채팅하기 누르면 저거
+    @PostMapping(value = "/add")
+    public ResponseEntity<String> create(@RequestBody ChatRoomRequest request){
         Post post =  postService.findOne(request.getPostId());
         ChatRoom chatroom = ChatRoom.from(post, request);
         chatRoomService.save(chatroom);
+        return ResponseEntity.ok(chatroom.getRoomId());
     }
 
-//    @GetMapping(value = "/room/{userId}")
-//    public ResponseEntity<List<ChatRoom>> findAllByUserId(@PathVariable Long userId){
-//        List<ChatRoom> response = chatRoomService.findAllByUserId(userId);
-//        return ResponseEntity.ok(response);
-//    }
+    // return되는 roomid로 url에 붙히면 새로 생성된 채팅룸이 뜨도록 한다.
+
 
     @GetMapping(value = "/room/{roomId}")
     public ResponseEntity<ChatRoom> findByRoomId(@PathVariable String roomId){
@@ -59,9 +59,9 @@ public class ChatRoomController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<Integer> countChatRoomByPostId(@RequestBody Post post) {
-        Integer response = chatRoomService.countChatRoomByPostId(post.getId());
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Integer> countChatRoomByPostId(@PathVariable Long id) {
+        Integer response = chatRoomService.countChatRoomByPostId(id);
         return ResponseEntity.ok(response);
     }
 
