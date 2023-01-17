@@ -50,4 +50,16 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         return chatRoomRepository.findById(chatRoomId).orElseThrow(ChatRoomException);
     }
 
+
+    @Override
+    public boolean checkRoom(Long postId, Long userId) {
+        int c = chatRoomRepository.checkRoom(postId, userId);
+        if(c>0) return true;
+        return false;
+    }
+
+    @Override
+    public ChatRoom findChatRoomByPostAndUser(Long postId, Long userId) {
+        return chatRoomRepository.findChatRoomByPostAndUser( postId,  userId);
+    }
 }

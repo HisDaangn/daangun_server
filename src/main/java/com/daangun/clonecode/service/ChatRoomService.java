@@ -15,4 +15,9 @@ public interface ChatRoomService {
     ChatRoom findByRoomId(String roomId);
 
     int countChatRoomByPostId(Long postId);
+
+    boolean checkRoom(Long postId, Long userId);
+    ChatRoom findChatRoomByPostAndUser(Long postId, Long userId);
+
+
 }

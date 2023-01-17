@@ -14,10 +14,4 @@ public class ChatRoomRequest {
     private Long subId;
     private Long postId;
 
-//    public ChatRoomRequest (String roomId, Long pubId, Long subId){
-//        this.roomId = roomId;
-//        this.pubId = pubId;
-//        this.subId = subId;
-//    }
-
 }
