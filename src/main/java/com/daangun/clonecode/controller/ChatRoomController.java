@@ -48,12 +48,17 @@ public class ChatRoomController {
     // Response -> String roomId
     @PostMapping(value = "/add")
     public ResponseEntity<String> create(@RequestBody ChatRoomRequest request){
-        Post post =  postService.findOne(request.getPostId());
-        User sub = userService.findById(request.getSubId());
-        User pub = userService.findById(request.getPubId());
-        ChatRoom chatroom = ChatRoom.from(sub.getName(), pub.getName(), post, request);
-        chatRoomService.save(chatroom);
-        return ResponseEntity.ok(chatroom.getRoomId());
+        if(chatRoomService.checkRoom(request.getPostId(), request.getPubId())){
+            return ResponseEntity.ok(chatRoomService.findChatRoomByPostAndUser(request.getPostId(), request.getPubId()).getRoomId());
+        }
+        else{
+            Post post =  postService.findOne(request.getPostId());
+            User sub = userService.findById(request.getSubId());
+            User pub = userService.findById(request.getPubId());
+            ChatRoom chatroom = ChatRoom.from(sub.getName(), pub.getName(), post, request);
+            chatRoomService.save(chatroom);
+            return ResponseEntity.ok(chatroom.getRoomId());
+        }
     }
 
     @GetMapping(value = "/room/{roomId}")
