@@ -6,12 +6,14 @@ import com.daangun.clonecode.model.User;
 import com.daangun.clonecode.service.ChatMessageService;
 import com.daangun.clonecode.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.List;
 public class STOMPController {
 
     private final SimpMessagingTemplate template; //특정 Broker로 메세지를 전달
+    @Autowired
     private ChatMessageService chatMessageService;
 
 
@@ -46,6 +49,13 @@ public class STOMPController {
         List<ChatMessage> response = chatMessageService.findChatMessageByRoomId(roomId);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping(value="/chat/add/{roomId}")
+    public ResponseEntity<ChatMessage> save(@PathVariable String roomId, @RequestBody ChatMessageRequest request){
+        ChatMessage response = chatMessageService.save(ChatMessage.from(request));
+        return ResponseEntity.ok(response);
+    }
+
 
 
 }

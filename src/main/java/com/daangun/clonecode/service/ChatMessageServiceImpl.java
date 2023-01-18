@@ -5,6 +5,7 @@ import com.daangun.clonecode.model.ChatMessage;
 import com.daangun.clonecode.repository.ChatMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
 
 
+    @Override
+    @Transactional
     public ChatMessage save(ChatMessage message) {
         ChatMessage ret = chatMessageRepository.save(message);
         System.out.println("채팅저장완료.");
