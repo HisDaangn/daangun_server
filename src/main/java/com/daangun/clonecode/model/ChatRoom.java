@@ -38,8 +38,8 @@ public class ChatRoom extends BaseEntity {
                 .roomId(UUID.randomUUID().toString())
                 .pubId(request.getPubId())
                 .subId(request.getSubId())
-                .pubName(subName)
-                .subName(pubName)
+                .pubName(pubName)
+                .subName(subName)
                 .build();
     }
 
