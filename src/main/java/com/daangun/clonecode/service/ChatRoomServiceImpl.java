@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 import java.util.function.Supplier;
@@ -41,7 +42,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
     @Override
     public List<ChatRoom> findAllByUserId(Long id){
-        List<ChatRoom> list = chatRoomRepository.findChatRoomByUserId(id);
+        List<ChatRoom> list = new LinkedList<ChatRoom>();
+        try{
+           list = chatRoomRepository.findChatRoomByUserId(id);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
         return list;
     }
 
