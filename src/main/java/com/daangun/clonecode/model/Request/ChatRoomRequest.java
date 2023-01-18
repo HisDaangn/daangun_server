@@ -10,8 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatRoomRequest {
-    private Long pubId;
-    private Long subId;
+    private Long pubId; // seller
+    private Long subId; // customer
     private Long postId;
 
 }
