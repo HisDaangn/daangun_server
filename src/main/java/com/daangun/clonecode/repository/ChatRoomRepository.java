@@ -15,8 +15,7 @@ import java.util.Map;
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
 
     @Query("select r from ChatRoom r " +
-    "where r.pubId = :userId " +
-    "or r.subId = :userId "+
+    "where r.subId = :userId "+
     "order by r.created_at desc ")
     List<ChatRoom> findChatRoomByUserId(Long userId);
 
