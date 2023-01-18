@@ -42,6 +42,7 @@ public class User extends BaseEntity {
 
     public void update(UserRequest request){
         this.name = request.getName();
+        this.address = request.getAddress();
     }
 
 }
