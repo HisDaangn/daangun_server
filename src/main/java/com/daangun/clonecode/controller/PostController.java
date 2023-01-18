@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //import javax.xml.ws.Response;
 
@@ -51,13 +55,10 @@ public class PostController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Post>> viewAll(){
-       List<Post> target = postService.getAllItems();
+       List<Post> target = postService.getAllItems().stream().sorted(Comparator.comparing(Post::getExpose_at).reversed()).collect(Collectors.toList());
         return ResponseEntity.ok(target);
 
     }
-
-
-
 
     @PatchMapping("/lift/{id}")
     public ResponseEntity<Long> lift(@PathVariable Long id){
