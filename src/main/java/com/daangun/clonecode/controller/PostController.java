@@ -57,7 +57,6 @@ public class PostController {
     public ResponseEntity<List<Post>> viewAll(){
        List<Post> target = postService.getAllItems().stream().sorted(Comparator.comparing(Post::getExpose_at).reversed()).collect(Collectors.toList());
         return ResponseEntity.ok(target);
-
     }
 
     @PatchMapping("/lift/{id}")

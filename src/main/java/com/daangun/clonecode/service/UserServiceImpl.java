@@ -6,6 +6,7 @@ import com.daangun.clonecode.model.User;
 import com.daangun.clonecode.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public User saveUser(User user){
         return userRepository.save(user);
     }
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public User update(String googleId, UserRequest userRequest) {
         User user = this.findUserByGoogleId(googleId);
         user.update(userRequest);
