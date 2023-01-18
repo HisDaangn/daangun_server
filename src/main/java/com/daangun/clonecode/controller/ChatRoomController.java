@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+import javax.xml.ws.Response;
 import java.net.Inet4Address;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +40,11 @@ public class ChatRoomController {
     private UserService userService;
 
 
+    public List<ChatRoom> findAllByPostId(Long postId){
+        List<ChatRoom> response = chatRoomService.findALlByPostId(postId);
+        return response;
+    }
+
     @GetMapping(value = "/user/{id}")
     public ResponseEntity<List<ChatRoom>> findAllByUserId(@PathVariable Long id){
         List<ChatRoom> response = chatRoomService.findAllByUserId(id);
@@ -48,17 +55,29 @@ public class ChatRoomController {
     // Response -> String roomId
     @PostMapping(value = "/add")
     public ResponseEntity<String> create(@RequestBody ChatRoomRequest request){
-        if(chatRoomService.checkRoom(request.getPostId(), request.getPubId())){
-            return ResponseEntity.ok(chatRoomService.findChatRoomByPostAndUser(request.getPostId(), request.getPubId()).getRoomId());
+        List<ChatRoom> temp = this.findAllByPostId(request.getPostId());
+        if(temp.size()>0){
+            for(int i=0; i<temp.size();i++){
+                if(temp.get(i).getPubId().equals(request.getPubId()) && temp.get(i).getSubId().equals(request.getSubId())){
+                    try {
+                        if(!temp.get(i).getPost().isDeleted()){
+                            return ResponseEntity.ok(temp.get(i).getRoomId());
+                        }
+                    }
+                    catch(EntityNotFoundException e){
+                        return ResponseEntity.ok("deleted");
+                    }
+                }
+            }
         }
-        else{
-            Post post =  postService.findOne(request.getPostId());
-            User sub = userService.findById(request.getSubId());
-            User pub = userService.findById(request.getPubId());
-            ChatRoom chatroom = ChatRoom.from(sub.getName(), pub.getName(), post, request);
-            chatRoomService.save(chatroom);
-            return ResponseEntity.ok(chatroom.getRoomId());
-        }
+        Post post =  postService.findOne(request.getPostId());
+        if(post.isDeleted()) return ResponseEntity.ok("deleted");
+        User sub = userService.findById(request.getSubId());
+        User pub = userService.findById(request.getPubId());
+        ChatRoom chatroom = ChatRoom.from(sub.getName(), pub.getName(), post, request);
+        chatRoomService.save(chatroom);
+        return ResponseEntity.ok(chatroom.getRoomId());
+
     }
 
     @GetMapping(value = "/room/{roomId}")

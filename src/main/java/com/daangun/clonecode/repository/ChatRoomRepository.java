@@ -23,11 +23,11 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
     @Query("select r from ChatRoom r where r.roomId = :roomId")
     ChatRoom findByRoomId(String roomId);
 
-    @Query("select count(r.id) from ChatRoom r " +
+    @Query("select r from ChatRoom r " +
             "where r.post.id = :postId ")
-    int countChatRoomByPostId(Long postId);
+    List<ChatRoom> countChatRoomByPostId(Long postId);
 
-    @Query("select count(r.id) from ChatRoom r where exists (select c from ChatRoom c where c.post.id = :postId and (c.pubId = :userId or c.subId = :userId))")
+    @Query("select count(r.id)from ChatRoom r where r.post.id = :postId and (r.pubId = :userId or r.subId = :userId)")
     int checkRoom(Long postId, Long userId);
 
     @Query("select r from ChatRoom r where exists (select c from ChatRoom c where c.post.id = :postId and (c.pubId = :userId or c.subId = :userId))")
