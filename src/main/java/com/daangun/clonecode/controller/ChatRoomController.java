@@ -87,9 +87,9 @@ public class ChatRoomController {
     }
 
 
-    @GetMapping(value = "/count/{userid}")
-    public ResponseEntity<Integer> countChatRoomByPostId(@PathVariable Long userid) {
-        Integer response = chatRoomService.countChatRoomByPostId(userid);
+    @GetMapping(value = "/count/{postid}")
+    public ResponseEntity<Integer> countChatRoomByPostId(@PathVariable Long postid) {
+        Integer response = chatRoomService.countChatRoomByPostId(postid);
         return ResponseEntity.ok(response);
     }
 
